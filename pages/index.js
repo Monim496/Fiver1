@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function main() {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <section className="flex justify-center items-center h-screen">
       <div>
         <p className="text-center text-4xl text-white">
           Welcome to my Website
@@ -20,6 +20,6 @@ export default function main() {
           </Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

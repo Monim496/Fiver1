@@ -18,7 +18,7 @@ async function handler(req, res) {
 
   if (!user) {
     res.status(404).json({ message: "Your old password is incorrect!" });
-    client.close();
+
     return;
   }
 

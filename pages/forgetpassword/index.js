@@ -5,9 +5,18 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function ForgetPassword() {
   const [loading, setLoading] = useState(false);
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  if (session) {
+    router.push("/home");
+  }
 
   const oldPasswordInputRef = useRef();
   const newPasswordInputRef = useRef();
@@ -71,7 +80,14 @@ export default function ForgetPassword() {
         <link rel="icon" href="/images/LostNestLogo.svg" />
       </Head>
       <ToastContainer autoClose={1500} draggable closeOnClick />
-      <div className="h-screen w-screen flex justify-center items-center">
+      <div className="h-screen w-screen flex justify-center items-center flex-col gap-4">
+        <Image
+          src="/images/small.webp"
+          alt="Your Logo"
+          width={135}
+          height={150}
+          className="rounded-2xl"
+        ></Image>
         <div className="w-[450px] h-[350px] border-2 border-solid mx-2  p-5 rounded-2xl shadow-2xl border-white hover:border-double">
           <h1 className="text-2xl font-bold text-white flex items-center justify-center">
             Reset Password?
@@ -79,21 +95,19 @@ export default function ForgetPassword() {
 
           <form onSubmit={submit}>
             <div className="mt-5 ">
-              <label className="block text-gray-300">Enter Old Password</label>
+              <label className="block text-sm text-gray-300">Enter Old Password</label>
               <input
                 type="password"
-                placeholder="Enter your old password"
-                className="w-full h-10 p-2 border rounded-md outline-red-400 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="w-full h-10 px-2 py-1 border rounded-md outline-red-400 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 ref={oldPasswordInputRef}
                 required
               ></input>
             </div>
             <div className="mt-5">
-              <label className="block text-gray-300">Enter New Password</label>
+              <label className="block text-gray-300 text-sm">Enter New Password</label>
               <input
                 type="password"
-                placeholder="Enter your new password"
-                className="w-full h-10 p-2 border rounded-md outline-red-400 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="w-full h-10 px-2 py-1 border rounded-md outline-red-400 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 ref={newPasswordInputRef}
                 required
               />
@@ -120,7 +134,3 @@ export default function ForgetPassword() {
     </Fragment>
   );
 }
-
-
-
-
