@@ -1,6 +1,7 @@
 import HeadContent from "@/components/Home/HeaderContent";
-import Player from "@/components/Home/player";
+import AdminLink from "@/components/Home/adminlink";
 import { useSession } from "next-auth/react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -10,7 +11,7 @@ export default function HomePage() {
 
   useEffect(() => {
     if (!session) {
-      router.push("/signin");
+      router.push("/");
     }
   }, [router, session]);
 
@@ -19,19 +20,20 @@ export default function HomePage() {
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-     minHeight: "100vh",
-    //marginBottom:"10rem",
-    
-    
-    // maxHeight: "100vh",
-    // overflowY: "scroll",
+    minHeight: "100vh",
   };
 
-  //style={{ maxHeight: '100vh', overflowY: 'scroll' }}
   return (
-    <div style={backgroundImageStyle}>
-      <HeadContent />
-      <Player />
-    </div>
+    <>
+      <Head>
+        <title>Planet-Q-Production</title>
+        <meta name="description" content="planet q production music player" />
+        <link rel="icon" href="/images/small.webp" />
+      </Head>
+      <div style={backgroundImageStyle}>
+        <HeadContent />
+        <AdminLink />
+      </div>
+    </>
   );
 }

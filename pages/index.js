@@ -1,25 +1,28 @@
-import Link from "next/link";
+import AuthForm from "@/components/auth/authForm";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import Head from "next/head";
 
-export default function main() {
+export default function SignIn() {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  if (session) {
+    router.push("/home");
+  }
+
   return (
-    <section className="flex justify-center items-center h-screen">
-      <div>
-        <p className="text-center text-4xl text-white">
-          Welcome to my Website
-        </p>
-        <div className="text-center flex flex-col">
-          <Link href="/signin" legacyBehavior>
-            <a className="inline-block px-10 py-2 mt-4 text-white bg-indigo-600 rounded-md hover:bg-indigo-500">
-              Login
-            </a>
-          </Link>
-          <Link href="/home" legacyBehavior>
-            <a className="inline-block px-10 py-2 mt-4 text-white bg-indigo-600 rounded-md hover:bg-indigo-500">
-              Home
-            </a>
-          </Link>
-        </div>
-      </div>
-    </section>
+    <>
+    <Head>
+        <title>Planet-Q-Production</title>
+        <meta
+          name="description"
+          content="planet q production music player"
+        />
+        <link rel="icon" href="/images/small.webp" />
+      </Head>
+      <AuthForm />
+    </>
   );
 }
+

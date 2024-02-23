@@ -72,12 +72,9 @@ export default function ForgetPassword() {
   return (
     <Fragment>
       <Head>
-        <title>Lost Nest</title>
-        <meta
-          name="description"
-          content="Lost and Found Hub for University Students"
-        />
-        <link rel="icon" href="/images/LostNestLogo.svg" />
+        <title>Planet-Q-Production</title>
+        <meta name="description" content="planet q production music player" />
+        <link rel="icon" href="/images/small.webp" />
       </Head>
       <ToastContainer autoClose={1500} draggable closeOnClick />
       <div className="h-screen w-screen flex justify-center items-center flex-col gap-4">
@@ -95,7 +92,9 @@ export default function ForgetPassword() {
 
           <form onSubmit={submit}>
             <div className="mt-5 ">
-              <label className="block text-sm text-gray-300">Enter Old Password</label>
+              <label className="block text-sm text-gray-300">
+                Enter Old Password
+              </label>
               <input
                 type="password"
                 className="w-full h-10 px-2 py-1 border rounded-md outline-red-400 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -104,7 +103,9 @@ export default function ForgetPassword() {
               ></input>
             </div>
             <div className="mt-5">
-              <label className="block text-gray-300 text-sm">Enter New Password</label>
+              <label className="block text-gray-300 text-sm">
+                Enter New Password
+              </label>
               <input
                 type="password"
                 className="w-full h-10 px-2 py-1 border rounded-md outline-red-400 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
