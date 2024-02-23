@@ -1,6 +1,5 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { gifuct, parseGIF, decompressFrames } from "gifuct-js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
