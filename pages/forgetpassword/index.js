@@ -43,7 +43,7 @@ export default function ForgetPassword() {
     if (!response.ok) {
       toast.error(data.message, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -54,7 +54,7 @@ export default function ForgetPassword() {
     } else {
       toast.success(data.message, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

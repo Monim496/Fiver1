@@ -40,7 +40,7 @@ export default function AuthForm() {
       router.push("/home");
       toast.success("Success!", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -53,7 +53,7 @@ export default function AuthForm() {
     if (result.error) {
       toast.error(result.error, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

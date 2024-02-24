@@ -13,7 +13,7 @@ async function handler(req, res) {
       const allVideoLinks = await usersCollection
         .find({}, { projection: { _id: 0 } })
         .toArray();
-        // console.log(allVideoLinks);
+         
       res.status(200).json(allVideoLinks);
     } catch (error) {
       console.error("Error:", error);

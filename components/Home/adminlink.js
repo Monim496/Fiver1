@@ -66,64 +66,33 @@ export default function AdminLink() {
     event.target.reset();
   };
 
-  function convertToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        resolve(reader.result.split(",")[1]); // Extract base64 data
-      };
-
-      reader.onerror = (error) => {
-        reject(error);
-      };
-
-      reader.readAsDataURL(file);
-    });
-  }
-
-  function converttobase64(e) {
+  function convertToBase64(e) {
     const selectedFile = e.target.files[0];
 
-    // Ensure a file is selected
     if (!selectedFile) {
-      console.error("No file selected.");
-      return; // Or handle the error differently
+      setFileError("No file selected.");
+
+      return;
     }
 
-    // Check for valid image/GIF file type
-    const validTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
+    const validTypes = ["image/png", "image/jpeg", "image/jpg"];
     if (!validTypes.includes(selectedFile.type)) {
-      setFileError(
-        "Invalid file type. Please select a PNG, JPEG/JPG, or GIF file."
-      );
-      return; // Or handle the error differently
+      setFileError("Invalid file type. Please select a PNG, JPEG/JPG file.");
+      return;
     }
 
-    // Handle PNG, JPEG/JPG files
-    if (validTypes.slice(0, 3).includes(selectedFile.type)) {
+    if (validTypes.includes(selectedFile.type)) {
       setFileError("");
       const reader = new FileReader();
       reader.readAsDataURL(selectedFile);
 
       reader.onload = () => {
-        setIsThumbnail("");
         setIsThumbnail(reader.result);
       };
 
-      reader.onerror = () => {
-        console.error("Error reading the file:", error); // Log specific error details
+      reader.onerror = (error) => {
+        console.error("Error reading the file:", error);
       };
-    } else if (selectedFile.type === "image/gif") {
-      convertToBase64(selectedFile)
-        .then((base64String) => {
-          // console.error(base64String);
-          setIsThumbnail(base64String);
-        })
-        .catch((error) => {
-          console.error("Error converting GIF to base64:", error);
-          setFileError("Error converting GIF to base64.");
-        });
     }
   }
 
@@ -299,7 +268,7 @@ export default function AdminLink() {
             <div className="bg-transparent flex flex-col justify-center items-center mx-4">
               <label
                 htmlFor="cover-photo"
-                className="block bg-transparent text-md font-bold leading-6 text-yellow-500 md:text-white"
+                className="block bg-transparent text-md text-center font-bold leading-6 text-yellow-500 md:text-white"
               >
                 Update the thumbnail picture with an upload here
               </label>
@@ -331,7 +300,7 @@ export default function AdminLink() {
                         name="file-upload"
                         type="file"
                         className="bg-transparent sr-only"
-                        onChange={converttobase64}
+                        onChange={convertToBase64}
                       ></input>
                     </label>
                     <p className="pl-1 bg-transparent font-bold text-xs text-indigo-600">
@@ -339,7 +308,7 @@ export default function AdminLink() {
                     </p>
                   </div>
                   <p className="text-xs bg-transparent font-bold leading-5 text-indigo-600">
-                    PNG, JPG/JPEG, GIF up to 10MB
+                    PNG, JPG/JPEG up to 10MB
                   </p>
                 </div>
               </div>

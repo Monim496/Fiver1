@@ -7,7 +7,7 @@ async function handler(req, res) {
 
   const data = req.body;
 
-  const { videoLink } = data;
+  let { videoLink } = data;
 
   if (!videoLink) {
     res.status(422).json({
@@ -15,7 +15,13 @@ async function handler(req, res) {
     });
     return;
   }
+  // console.log("old " + videoLink);
+  if (videoLink.includes("spotify")) {
+    const spotifyPart = videoLink.split(".com")[1];
+    videoLink = `https://open.spotify.com/embed${spotifyPart}`;
+  }
 
+  //console.log("new " + videoLink);
   const client = await connectToDatabase();
   if (client) {
     const db = client.db();

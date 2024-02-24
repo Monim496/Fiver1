@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+   
     "mongodb": "^6.3.0",
     "next": "14.1.0",
     "next-auth": "^4.24.6",
@@ -17,6 +18,7 @@
     "react-dom": "^18",
     "react-player": "^2.14.1",
     "react-spinners": "^0.13.8",
+    "react-spotify-player": "^1.0.4",
     "react-toastify": "^10.0.4"
   },
   "devDependencies": {

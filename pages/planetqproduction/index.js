@@ -32,7 +32,7 @@ export default function publicplanetqproduction(initialVideoLink) {
 
 export async function getStaticProps() {
   // Fetch initial video link here if needed
-  const initialVideoLink = "https://example.com/initial-video";
+  const initialVideoLink = "https://youtu.be/I5uiP9ogijs?si=O33QCOnUKp-Y7eHG";
   return {
     props: {
       initialVideoLink,
