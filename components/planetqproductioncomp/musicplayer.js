@@ -131,7 +131,7 @@ export default function MusicPlayer(initialVideoLink) {
                 ? isVideoLink[currentVideoIndex].link
                 : "https://youtu.be/I5uiP9ogijs?si=O33QCOnUKp-Y7eHG"
             }
-            controls={true}
+            controls={false}
             light={isThumbnail.length ? isThumbnail : "/images/client.png"}
             pip={true}
             loop={!isVideoLink.length > 0 ? true : false}
