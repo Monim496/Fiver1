@@ -32,7 +32,7 @@ export default function HeadContent() {
 
 
         <div className="bg-transparent flex gap-4 justify-center items-center">
-          <Link href="/planetqproduction" className="bg-transparent text-md font-bold hover:underline sm:text-2xl">Music Player</Link>
+          <Link href="/planetqproductions" className="bg-transparent text-md font-bold hover:underline sm:text-2xl">Music Player</Link>
           <button
             className="text-white text-md font-bold ring-white ring-1 rounded-lg px-2 hover:underline hover:ring-2 sm:text-2xl"
             onClick={logoutHandler}

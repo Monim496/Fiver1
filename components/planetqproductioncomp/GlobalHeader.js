@@ -20,7 +20,7 @@ export default function GlobalHeader() {
               className="rounded-2xl bg-transparent"
             ></Image>
             <h1 className="animate-text bg-gradient-to-r text-center from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent text-sm font-black">
-              Planet Q Productions
+              View More
             </h1>
           </div>
         </Link>

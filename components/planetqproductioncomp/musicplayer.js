@@ -1,20 +1,28 @@
+
+
 import React, { useRef, useState, useEffect } from "react";
 import ReactPlayer from "react-player/lazy";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import classes from "./musicplayer.module.css";
 
 export default function MusicPlayer(initialVideoLink) {
   const [isVideoLink, setIsVideoLink] = useState([]);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isThumbnail, setIsThumbnail] = useState("");
+
   const playerRef = useRef(null);
 
   useEffect(() => {
     fetch("/api/link/getlink")
       .then((response) => response.json())
       .then((links) => {
-        setIsVideoLink(links);
+        const shuffledLinks = shuffleArray(links);
+        // Set the shuffled array
+        setIsVideoLink(shuffledLinks);
+
+
         if (links && links.length > 0) {
           toast.success("Music successfully retrieved.", {
             position: "top-right",
@@ -44,7 +52,6 @@ export default function MusicPlayer(initialVideoLink) {
     fetch("/api/thumbnail/modifythumbnail")
       .then((response) => response.json())
       .then((newthumbnail) => {
-        
         if (newthumbnail && newthumbnail.length > 0) {
           setIsThumbnail(newthumbnail[0].ThumbnailImage);
           toast.success("New Thumbnail added!", {
@@ -79,21 +86,42 @@ export default function MusicPlayer(initialVideoLink) {
     } else {
       setCurrentVideoIndex(0);
     }
-  }, [currentVideoIndex]);
+  }, []);
+
+  const shuffleArray = (array) => {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
+    }
+    return shuffledArray;
+  };
 
   const handleVideoEnd = () => {
     const totalVideos = isVideoLink.length;
+    const lastPlayedSongs = []; // Store the last two played songs
 
     // Generate a random index for the next video
     let randomIndex = Math.floor(Math.random() * totalVideos);
 
-    // Ensure the random index is different from the current index
-    while (randomIndex === currentVideoIndex) {
+    // Ensure the random index is not the current or previous song
+    while (
+      randomIndex === currentVideoIndex ||
+      lastPlayedSongs.includes(randomIndex)
+    ) {
       randomIndex = Math.floor(Math.random() * totalVideos);
     }
 
-    setCurrentVideoIndex(randomIndex);
+   
+    lastPlayedSongs.unshift(currentVideoIndex); 
+    if (lastPlayedSongs.length > 2) {
+      lastPlayedSongs.pop(); 
+    }
 
+    setCurrentVideoIndex(randomIndex);
     localStorage.setItem("currentVideoIndex", randomIndex.toString());
   };
 
@@ -117,6 +145,15 @@ export default function MusicPlayer(initialVideoLink) {
         draggable
         closeOnClick
       />
+      <style>
+        {`
+        @layer utilities {
+          .rotate-custom {
+            animation: spin 3s linear infinite;
+          }
+        }
+      `}
+      </style>
       <section className="bg-transparent flex gap-2 flex-col justify-center items-center mt-8">
         <h1 className="animate-text text-center bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent text-2xl font-black md:text-4xl">
           AI. Audio Player Presented By Planet Q Productions
@@ -140,16 +177,18 @@ export default function MusicPlayer(initialVideoLink) {
             onSeek={handleSeeking}
             stopOnUnmount={false}
             playIcon={
-              <Image
-                src="/images/client.png"
-                alt="Your Logo"
-                width={50}
-                height={120}
-                className="bg-transparent w-auto h-auto shadow-2xl opacity-95 transition-transform duration-200 ease-in-out transform-gpu hover:scale-125 hover:delay-100 hover:opacity-100"
-                style={{
-                  clipPath: "polygon(0% 0%, 100% 50%, 0% 100%)",
-                }}
-              ></Image>
+              <div className={classes.rotateicon}>
+                <Image
+                  src="/images/client.png"
+                  alt="Your Logo"
+                  width={45}
+                  height={60}
+                  className="bg-transparent w-auto h-auto shadow-2xl opacity-95 transition-transform duration-200 ease-in-out transform-gpu hover:scale-125 hover:delay-100 hover:opacity-100"
+                  style={{
+                    clipPath: "polygon(0% 0%, 100% 50%, 0% 100%)",
+                  }}
+                ></Image>
+              </div>
             }
             onEnded={handleVideoEnd}
           />
