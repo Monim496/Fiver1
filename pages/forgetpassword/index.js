@@ -85,7 +85,7 @@ export default function ForgetPassword() {
           height={150}
           className="rounded-2xl"
         ></Image>
-        <div className="w-[450px] h-[350px] border-2 border-solid mx-2  p-5 rounded-2xl shadow-2xl border-white hover:border-double">
+        <div className="w-[300px] h-[330px] border-2 border-solid mx-2  p-4 rounded-2xl shadow-2xl border-white hover:border-double sm:w-[400px] sm:p-5">
           <h1 className="text-2xl font-bold text-white flex items-center justify-center">
             Reset Password?
           </h1>
@@ -123,7 +123,7 @@ export default function ForgetPassword() {
             </div>
             <div className="mt-4 text-center">
               <Link
-                href="/signin"
+                href="/"
                 className="text-white text-sm hover:underline"
               >
                 Back to Login

@@ -5,7 +5,7 @@ async function handler(req, res) {
     return;
   } else {
     try {
-        //console.log("hi");
+        
       const client = await connectToDatabase();
 
       const usersCollection = client.db().collection("videolinks");

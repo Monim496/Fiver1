@@ -44,9 +44,9 @@ export default function MusicPlayer(initialVideoLink) {
     fetch("/api/thumbnail/modifythumbnail")
       .then((response) => response.json())
       .then((newthumbnail) => {
-
-        console.log(newthumbnail);
+        
         if (newthumbnail && newthumbnail.length > 0) {
+          setIsThumbnail(newthumbnail[0].ThumbnailImage);
           toast.success("New Thumbnail added!", {
             position: "top-right",
             autoClose: 1500,
@@ -57,9 +57,6 @@ export default function MusicPlayer(initialVideoLink) {
             progress: undefined,
             theme: "dark",
           });
-
-          setIsThumbnail(newthumbnail[0].ThumbnailImage);
-          
         }
       })
       .catch((error) => {
@@ -82,18 +79,22 @@ export default function MusicPlayer(initialVideoLink) {
     } else {
       setCurrentVideoIndex(0);
     }
-  }, []);
+  }, [currentVideoIndex]);
 
   const handleVideoEnd = () => {
-    if (currentVideoIndex === isVideoLink.length - 1) {
-      setCurrentVideoIndex(0);
-      localStorage.setItem("currentVideoIndex", "0");
-    } else {
-      const nextVideoIndex = currentVideoIndex + 1;
+    const totalVideos = isVideoLink.length;
 
-      setCurrentVideoIndex(nextVideoIndex);
-      localStorage.setItem("currentVideoIndex", nextVideoIndex.toString());
+    // Generate a random index for the next video
+    let randomIndex = Math.floor(Math.random() * totalVideos);
+
+    // Ensure the random index is different from the current index
+    while (randomIndex === currentVideoIndex) {
+      randomIndex = Math.floor(Math.random() * totalVideos);
     }
+
+    setCurrentVideoIndex(randomIndex);
+
+    localStorage.setItem("currentVideoIndex", randomIndex.toString());
   };
 
   const handlePause = () => {
@@ -116,7 +117,7 @@ export default function MusicPlayer(initialVideoLink) {
         draggable
         closeOnClick
       />
-      <section className="bg-transparent flex gap-2 flex-col justify-center items-center">
+      <section className="bg-transparent flex gap-2 flex-col justify-center items-center mt-8">
         <h1 className="animate-text text-center bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent text-2xl font-black md:text-4xl">
           AI. Audio Player Presented By Planet Q Productions
         </h1>
@@ -130,8 +131,8 @@ export default function MusicPlayer(initialVideoLink) {
                 ? isVideoLink[currentVideoIndex].link
                 : "https://youtu.be/I5uiP9ogijs?si=O33QCOnUKp-Y7eHG"
             }
-            controls={false}
-            light={isThumbnail ? isThumbnail : "/images/client.png"}
+            controls={true}
+            light={isThumbnail.length ? isThumbnail : "/images/client.png"}
             pip={true}
             loop={!isVideoLink.length > 0 ? true : false}
             playing={true}

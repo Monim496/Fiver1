@@ -224,7 +224,7 @@ export default function AdminLink() {
         draggable
         closeOnClick
       />
-      <section className="bg-transparent flex gap-4 flex-col lg:flex-row justify-center pb-6">
+      <section className="bg-transparent flex gap-4 flex-col lg:flex-row justify-center py-4">
         <div className="bg-transparent flex flex-col gap-6">
           <form
             className="bg-transparent flex flex-col gap-2 justify-center items-center"
