@@ -38,7 +38,7 @@ export default function MusicPlayer(initialVideoLink) {
             const foundIndex = shuffledLinks.findIndex(
               (item) => item.link === storedLinkValue.link
             );
-            console.log("Index of matching link:", foundIndex);
+            //console.log("Index of matching link:", foundIndex);
             if (foundIndex !== -1) {
               setCurrentVideoIndex(foundIndex);
               return;
@@ -47,16 +47,18 @@ export default function MusicPlayer(initialVideoLink) {
         }
       })
       .catch((error) => {
-        toast.error("An error occurred while fetching data.", {
-          position: "top-right",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        console.log(error.message);
+        console.log(error);
+        // toast.error("An error occurred while fetching data.", {
+        //   position: "top-right",
+        //   autoClose: 1500,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "dark",
+        // });
       });
 
     fetch("/api/thumbnail/modifythumbnail")
