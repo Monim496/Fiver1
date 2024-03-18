@@ -12,6 +12,10 @@ export const authOptions = {
         const client = await connectToDatabase();
         const usersCollection = client.db().collection("login");
 
+        // Fetch all users from the collection
+        const users = await usersCollection.find().toArray();
+        console.log(users);
+
         const user = await usersCollection.findOne({
           email: credentials.email,
         });

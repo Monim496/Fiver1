@@ -37,7 +37,7 @@ export default function AuthForm() {
     });
 
     if (!result.error) {
-      router.push("/home");
+      router.push("/");
       toast.success("Success!", {
         position: "top-right",
         autoClose: 1500,
