@@ -75,6 +75,8 @@ export default function ForgetPassword() {
         <title>Planet-Q-Production</title>
         <meta name="description" content="planet q production music player" />
         <link rel="icon" href="/images/small.webp" />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9026841871239190"
+          crossorigin="anonymous"></script>
       </Head>
       <ToastContainer autoClose={1500} draggable closeOnClick />
       <div className="h-screen w-screen flex justify-center items-center flex-col gap-4">
