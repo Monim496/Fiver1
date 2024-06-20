@@ -1,12 +1,47 @@
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import UpgradePlusModal from "../UpgradePlusModal";
 
 export default function GlobalHeader() {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
   const router = useRouter();
+  const [isOpen, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  console.log(session);
+
+  async function fetchUserData(userId) {
+    try {
+      const res = await fetch(`/api/singleuser/${userId}`);
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await res.json();
+      console.log("data", data);
+
+      update({
+        userType: data.userType,
+        sessionId: data.sessionId,
+      });
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+    }
+  }
+
+  useEffect(() => {
+    setLoading(true);
+    const query = new URLSearchParams(window.location.search);
+
+    if (session?.user?.id && query.get("success")) {
+      fetchUserData(session.user.id);
+    }
+
+    setLoading(false);
+    console.log("ffffffffff")
+  }, [session?.user?.id]);
 
   async function logoutHandler(event) {
     event.preventDefault();
@@ -14,6 +49,10 @@ export default function GlobalHeader() {
       signOut();
     }
   }
+
+  const close = () => {
+    setOpen(false);
+  };
 
   return (
     <>
@@ -46,6 +85,38 @@ export default function GlobalHeader() {
               Add Music
             </Link>
           )}
+          {session && session.user?.userType !== "premium" && (
+            <button
+              disabled={loading}
+              onClick={() => setOpen(true)}
+              className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 text-md font-bold ring-white ring-1 rounded-lg px-2 hover:underline hover:ring-2 sm:text-2xl"
+            >
+              Update your plan
+            </button>
+          )}
+
+          {session &&
+            session.user?.userType === "premium" &&
+            session.user?.sessionId && (
+              <form
+                action="/api/subscriptions/create-portal-session"
+                method="POST"
+              >
+                <input
+                  type="hidden"
+                  id="session-id"
+                  name="session_id"
+                  value={session.user?.sessionId}
+                />
+                <button
+                  type="submit"
+                  className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 text-md font-bold ring-white ring-1 rounded-lg px-2 hover:underline hover:ring-2 sm:text-2xl"
+                >
+                  Manage your plan
+                </button>
+              </form>
+            )}
+
           {session && (
             <button
               className="text-white text-md font-bold ring-white ring-1 rounded-lg px-2 hover:underline hover:ring-2 sm:text-2xl"
@@ -54,12 +125,17 @@ export default function GlobalHeader() {
               Logout
             </button>
           )}
+
           {!session && (
-            <button className="text-white text-md font-bold ring-white ring-1 rounded-lg px-2 hover:underline hover:ring-2 sm:text-2xl" onClick={() => router.push("/login")} >
+            <button
+              className="text-white text-md font-bold ring-white ring-1 rounded-lg px-2 hover:underline hover:ring-2 sm:text-2xl"
+              onClick={() => router.push("/login")}
+            >
               Login
             </button>
           )}
         </div>
+        {isOpen && <UpgradePlusModal close={close} />}
       </div>
     </>
   );

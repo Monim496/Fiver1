@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
-import dynamic from 'next/dynamic';
-const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
+import dynamic from "next/dynamic";
+const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -176,9 +176,9 @@ export default function MusicPlayer() {
       `}
       </style>
       <section className="bg-transparent flex gap-2 flex-col justify-center items-center mt-8">
-        <h1 className="animate-text text-center bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent text-2xl font-black md:text-4xl">
-          AI. Audio Player Presented By Planet Q Productions
-        </h1>
+        <h2 className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent text-2xl font-black md:text-4xl mb-5">
+          Make a song about anything
+        </h2>
 
         <div className="bg-transparent w-full h-auto flex justify-center items-center mb-2">
           <ReactPlayer
@@ -190,11 +190,7 @@ export default function MusicPlayer() {
                 : "https://youtu.be/I5uiP9ogijs?si=O33QCOnUKp-Y7eHG"
             }
             controls={false}
-            light={
-              isThumbnail?.length
-                ? isThumbnail
-                : "/images/client.png"
-            }
+            light={isThumbnail?.length ? isThumbnail : "/images/client.png"}
             onStart={playhandler}
             pip={true}
             loop={!isVideoLink?.length > 0}

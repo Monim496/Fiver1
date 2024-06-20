@@ -81,7 +81,7 @@ export default function AuthForm() {
   return (
     <>
       <ToastContainer autoClose={1500} draggable closeOnClick />
-      <div className="h-screen w-screen flex min-h-full flex-1  flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="h-screen w-screen flex min-h-full flex-1  flex-col justify-center px-6 py-12 lg:px-8 bg-[#333A44]">
         <div className=" flex justify-center items-center flex-col sm:mx-auto sm:w-full sm:max-w-sm">
           <Image
             src="/images/small.webp"

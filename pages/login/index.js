@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function Login() {
-  const { data: session } = useSession()
+  const {data: session} = useSession()
   const router = useRouter();
 
   useEffect(() => {
@@ -20,8 +20,6 @@ export default function Login() {
         <title>Planet-Q-Production</title>
         <meta name="description" content="planet q production music player" />
         <link rel="icon" href="/images/small.webp" />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9026841871239190"
-          crossorigin="anonymous"></script>
       </Head>
       <AuthForm />
     </>

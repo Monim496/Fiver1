@@ -1,6 +1,8 @@
 import MusicPlayer from "@/components/planetqproductioncomp/musicplayer";
 import GlobalHeader from "@/components/planetqproductioncomp/GlobalHeader";
 import Head from "next/head";
+import { CiMusicNote1 } from "react-icons/ci";
+import { FaArrowDown } from "react-icons/fa6";
 
 export default function Home(initialVideoLink) {
   const backgroundImageStyle = {
@@ -17,12 +19,43 @@ export default function Home(initialVideoLink) {
         <title>Planet-Q-Production</title>
         <meta name="description" content="planet q production music player" />
         <link rel="icon" href="/images/small.webp" />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9026841871239190"
-          crossorigin="anonymous"></script>
       </Head>
       <div style={backgroundImageStyle}>
         <GlobalHeader />
         <MusicPlayer initialVideoLink={initialVideoLink} />
+
+        <div className=" w-full lg:w-3/4 px-8 m-auto py-14 ">
+          <div className=" lg:flex lg:gap-5 ">
+            <button className="bg-gradient-to-t from-slate-600 to-slate-500 text-white flex justify-between items-center p-4 rounded mb-5 w-full hover:from-slate-500 hover:to-slate-600 transition-colors duration-300 shadow-lg text-sm gap-2">
+              Futuristic hip hop song about life in the future
+              <FaArrowDown className="text-purple-500" />
+            </button>
+            <button className="bg-gradient-to-t from-slate-600 to-slate-500 text-white flex justify-between items-center p-4 rounded mb-5 w-full hover:from-slate-500 hover:to-slate-600 transition-colors duration-300 text-sm gap-2">
+              r&b song about the future
+              <FaArrowDown className="text-purple-500" />
+            </button>
+            <button className="bg-gradient-to-t from-slate-600 to-slate-500 text-white flex justify-between items-center p-4 rounded mb-5 w-full hover:from-slate-500 hover:to-slate-600 transition-colors duration-300 text-sm gap-2">
+              Folk song about a rainy day in the future
+              <FaArrowDown className="text-purple-500" />
+            </button>
+          </div>
+
+          <span className=" text-yellow-400 ">Comming soon</span>
+          <div className="relative">
+            <input
+              className="w-full bg-[#333A44] border-2 border-white shadow-lg p-5 text-xl text-white rounded "
+              type="text"
+              placeholder="A solo music"
+            />
+            <button className=" bg-purple-500 text-white p-2 rounded absolute right-5 transform -translate-y-1/2 top-1/2 flex items-center ">
+              Create <CiMusicNote1 />
+            </button>
+          </div>
+        </div>
+
+        <h1 className="animate-text text-center bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent text-2xl font-black md:text-4xl pb-10">
+          AI. Audio Player Presented By Planet Q Productions
+        </h1>
       </div>
     </>
   );
