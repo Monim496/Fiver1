@@ -48,7 +48,6 @@ export default function MusicPlayer() {
         }
       })
       .catch((error) => {
-        console.log(error);
         toast.error("An error occurred while fetching data.", {
           position: "top-right",
           autoClose: 1500,
@@ -177,7 +176,7 @@ export default function MusicPlayer() {
       </style>
       <section className="bg-transparent flex gap-2 flex-col justify-center items-center mt-8">
         <h2 className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent text-2xl font-black md:text-4xl mb-5">
-          Make a song about anything
+          Make A Song About Anything
         </h2>
 
         <div className="bg-transparent w-full h-auto flex justify-center items-center mb-2">
