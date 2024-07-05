@@ -28,7 +28,7 @@ export default function HomePage() {
 
   const fetchSongs = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/link/getlink");
+      const response = await fetch("/api/link/getlink");
       if (!response.ok) {
         throw new Error("Failed to fetch songs");
       }
